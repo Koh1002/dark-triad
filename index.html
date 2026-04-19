@@ -7,7 +7,7 @@
 <meta name="description" content="ダークトライアド（マキャベリアリズム・ナルシシズム・サイコパシー）にサディズムを加えた4因子を診断する簡易アセスメント。" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Noto+Serif+JP:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -16,43 +16,130 @@
 
   <!-- Intro screen -->
   <section id="screen-intro" class="screen active">
-    <header class="intro-header">
-      <p class="eyebrow">Self Assessment</p>
-      <h1 class="title">ダークトライアド<br /><span class="title-sub">/ Dark Tetrad 診断</span></h1>
-      <p class="lede">
-        マキャベリアリズム・ナルシシズム・サイコパシー、そしてサディズムを加えた
-        「ダークテトラッド」と呼ばれる4つのパーソナリティ傾向を、簡易的にチェックします。
+    <div class="parlour">
+
+      <div class="parlour-corners" aria-hidden="true">
+        <span class="corner tl"></span><span class="corner tr"></span>
+        <span class="corner bl"></span><span class="corner br"></span>
+      </div>
+
+      <div class="emblem" aria-hidden="true">
+        <svg viewBox="0 0 240 240" class="emblem-svg">
+          <defs>
+            <radialGradient id="halo" cx="50%" cy="55%" r="50%">
+              <stop offset="0%" stop-color="rgba(201,169,110,0.35)"/>
+              <stop offset="60%" stop-color="rgba(201,169,110,0)"/>
+            </radialGradient>
+          </defs>
+          <circle cx="120" cy="125" r="110" fill="url(#halo)"/>
+          <g stroke="currentColor" stroke-width="0.8" stroke-linecap="round" fill="none" opacity="0.85">
+            <line x1="120" y1="14" x2="120" y2="34"/>
+            <line x1="173" y1="28" x2="167" y2="46"/>
+            <line x1="216" y1="62" x2="200" y2="74"/>
+            <line x1="234" y1="120" x2="214" y2="120"/>
+            <line x1="216" y1="178" x2="200" y2="166"/>
+            <line x1="173" y1="212" x2="167" y2="194"/>
+            <line x1="120" y1="226" x2="120" y2="206"/>
+            <line x1="67"  y1="212" x2="73"  y2="194"/>
+            <line x1="24"  y1="178" x2="40"  y2="166"/>
+            <line x1="6"   y1="120" x2="26"  y2="120"/>
+            <line x1="24"  y1="62"  x2="40"  y2="74"/>
+            <line x1="67"  y1="28"  x2="73"  y2="46"/>
+          </g>
+          <circle cx="120" cy="120" r="86" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.45"/>
+          <circle cx="120" cy="120" r="78" fill="none" stroke="currentColor" stroke-width="1" opacity="0.85"/>
+          <polygon points="120,52 187,170 53,170" fill="none" stroke="currentColor" stroke-width="1.4"/>
+          <polygon points="120,72 173,162 67,162" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.5"/>
+          <path d="M 78 132 Q 120 100 162 132 Q 120 164 78 132 Z" fill="none" stroke="currentColor" stroke-width="1.4"/>
+          <circle cx="120" cy="132" r="13" fill="none" stroke="currentColor" stroke-width="1"/>
+          <circle cx="120" cy="132" r="5"  fill="currentColor"/>
+          <line x1="120" y1="180" x2="120" y2="190" stroke="currentColor" stroke-width="0.8"/>
+          <line x1="110" y1="186" x2="130" y2="186" stroke="currentColor" stroke-width="0.6"/>
+        </svg>
+      </div>
+
+      <p class="latin-eyebrow">— Tetras Tenebrarum —</p>
+
+      <h1 class="parlour-title">
+        <span class="t-en">Cabinet of Shadows</span>
+        <span class="t-jp">闇の四性質を視る</span>
+      </h1>
+
+      <div class="ornate-divider" aria-hidden="true">
+        <svg viewBox="0 0 360 14">
+          <line x1="0"   y1="7" x2="20"  y2="7" stroke="currentColor" stroke-width="0.4" opacity="0.4"/>
+          <line x1="22"  y1="7" x2="158" y2="7" stroke="currentColor" stroke-width="0.7"/>
+          <g transform="translate(180,7)">
+            <polygon points="-14,0 0,-7 14,0 0,7" fill="currentColor"/>
+            <polygon points="-7,0 0,-3.5 7,0 0,3.5" fill="#0b0d14"/>
+          </g>
+          <line x1="202" y1="7" x2="338" y2="7" stroke="currentColor" stroke-width="0.7"/>
+          <line x1="340" y1="7" x2="360" y2="7" stroke="currentColor" stroke-width="0.4" opacity="0.4"/>
+        </svg>
+      </div>
+
+      <p class="incantation">
+        汝の内に潜む四つの影を、いま一度照らし出さん。<br/>
+        古き心理学の灯のもと、二十八の問いに静かに答えよ。
       </p>
-    </header>
 
-    <div class="intro-cards">
-      <article class="trait-card" data-trait="mach">
-        <h3>マキャベリアリズム</h3>
-        <p>戦略的で冷静な操作性。目的のための計算高さ。</p>
-      </article>
-      <article class="trait-card" data-trait="narc">
-        <h3>ナルシシズム</h3>
-        <p>自分は特別であるという誇大感と賞賛欲求。</p>
-      </article>
-      <article class="trait-card" data-trait="psyc">
-        <h3>サイコパシー</h3>
-        <p>衝動性と希薄な共感、罪悪感の乏しさ。</p>
-      </article>
-      <article class="trait-card" data-trait="sad">
-        <h3>サディズム</h3>
-        <p>他者の苦痛を楽しむ／傷つけることへの快。</p>
-      </article>
-    </div>
+      <div class="parlour-cards">
+        <article class="trait-card" data-trait="mach">
+          <span class="card-numeral">I</span>
+          <h3 class="card-en">Machiavellianism</h3>
+          <p class="card-jp">マキャベリアリズム</p>
+          <p class="card-desc">策謀と計算 — 静かに人を動かす者</p>
+        </article>
+        <article class="trait-card" data-trait="narc">
+          <span class="card-numeral">II</span>
+          <h3 class="card-en">Narcissism</h3>
+          <p class="card-jp">ナルシシズム</p>
+          <p class="card-desc">誇りと驕り — 鏡に映る黄金の自我</p>
+        </article>
+        <article class="trait-card" data-trait="psyc">
+          <span class="card-numeral">III</span>
+          <h3 class="card-en">Psychopathy</h3>
+          <p class="card-jp">サイコパシー</p>
+          <p class="card-desc">冷血と衝動 — 罪を知らぬ刃</p>
+        </article>
+        <article class="trait-card" data-trait="sad">
+          <span class="card-numeral">IV</span>
+          <h3 class="card-en">Sadism</h3>
+          <p class="card-jp">サディズム</p>
+          <p class="card-desc">残酷の悦び — 他者の痛みを蜜とする</p>
+        </article>
+      </div>
 
-    <div class="intro-meta">
-      <p>所要時間 約3〜5分 / 全28問 / 結果はレーダーチャートで表示</p>
-      <p class="disclaimer">
-        ※本診断は学術的尺度（SD3 / SD4 / Dirty Dozen / SSIS 等）を参考にした
-        エンタメ目的のセルフチェックです。臨床診断ではありません。
+      <div class="ornate-divider" aria-hidden="true">
+        <svg viewBox="0 0 360 14">
+          <line x1="0"   y1="7" x2="20"  y2="7" stroke="currentColor" stroke-width="0.4" opacity="0.4"/>
+          <line x1="22"  y1="7" x2="158" y2="7" stroke="currentColor" stroke-width="0.7"/>
+          <g transform="translate(180,7)">
+            <polygon points="-14,0 0,-7 14,0 0,7" fill="currentColor"/>
+            <polygon points="-7,0 0,-3.5 7,0 0,3.5" fill="#0b0d14"/>
+          </g>
+          <line x1="202" y1="7" x2="338" y2="7" stroke="currentColor" stroke-width="0.7"/>
+          <line x1="340" y1="7" x2="360" y2="7" stroke="currentColor" stroke-width="0.4" opacity="0.4"/>
+        </svg>
+      </div>
+
+      <p class="rite-meta">XXVIII の問い ・ 約三〜五分 ・ 結果はレーダーチャートにて</p>
+
+      <button id="btn-start" class="btn btn-primary btn-rite">
+        <span class="btn-glyph" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><polygon points="12,2 14,10 22,12 14,14 12,22 10,14 2,12 10,10" fill="currentColor"/></svg>
+        </span>
+        <span class="btn-label">鑑定をはじめる</span>
+        <span class="btn-glyph" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><polygon points="12,2 14,10 22,12 14,14 12,22 10,14 2,12 10,10" fill="currentColor"/></svg>
+        </span>
+      </button>
+
+      <p class="disclaimer parlour-disclaimer">
+        本鑑定は学術的尺度 (SD3 / SD4 / Dirty Dozen / SSIS) を典拠とする
+        セルフチェックであり、臨床的診断ではありません。
       </p>
     </div>
-
-    <button id="btn-start" class="btn btn-primary">診断をはじめる</button>
   </section>
 
   <!-- Quiz screen -->
