@@ -224,6 +224,7 @@
   const VILLAINS = [
     {
       id: 'puppeteer',
+      numeral: 'IX',
       name: '策謀家の公爵',
       en: 'The Puppeteer Duke',
       inspired:
@@ -251,6 +252,7 @@
     },
     {
       id: 'vain_tyrant',
+      numeral: 'IV',
       name: '虚栄の王',
       en: 'The Vain Tyrant',
       inspired:
@@ -276,6 +278,7 @@
     },
     {
       id: 'cold_executioner',
+      numeral: 'XIII',
       name: '氷血の執行者',
       en: 'The Cold Executioner',
       inspired:
@@ -302,6 +305,7 @@
     },
     {
       id: 'gleeful_tormentor',
+      numeral: 'XV',
       name: '歓喜の拷問者',
       en: 'The Gleeful Tormentor',
       inspired:
@@ -328,6 +332,7 @@
     },
     {
       id: 'dark_sovereign',
+      numeral: 'XVI',
       name: '闇の帝王',
       en: 'The Dark Sovereign',
       inspired:
@@ -354,6 +359,7 @@
     },
     {
       id: 'mirror_tyrant',
+      numeral: 'VII',
       name: '鏡の暴君',
       en: 'The Mirror Tyrant',
       inspired:
@@ -377,6 +383,7 @@
     },
     {
       id: 'silver_serpent',
+      numeral: 'II',
       name: '銀舌の蛇',
       en: 'The Silver-Tongued Serpent',
       inspired:
@@ -403,6 +410,7 @@
     },
     {
       id: 'black_charismatic',
+      numeral: 'I',
       name: '黒のカリスマ',
       en: 'The Black Charismatic',
       inspired:
@@ -428,6 +436,7 @@
     },
     {
       id: 'innocent_seeker',
+      numeral: 'XIX',
       name: '無垢の探究者',
       en: 'The Innocent Seeker',
       inspired: '古典的な善なる主人公像（反転としての対照サンプル）',
@@ -450,6 +459,7 @@
     },
     {
       id: 'grey_pilgrim',
+      numeral: 'XI',
       name: '灰色の巡礼者',
       en: 'The Grey Pilgrim',
       inspired: '善悪の境界を歩む灰色の旅人 — セヴェルス・スネイプ ／ 古典的アンチヒーロー像',
@@ -582,36 +592,19 @@
     return best;
   }
 
-  // text-to-image: Puter.js (free, keyless, browser-side)
-  //   puter.ai.txt2img(prompt, { model }) -> Promise<HTMLImageElement>
-  //   特徴タグを結合して、元キャラそのものではなく「特徴を合成した」
-  //   オリジナル肖像画をブラウザ側で生成する。
-  function villainPrompt(v) {
-    return [
-      'dark gothic oil painting portrait of',
-      v.features.join(', '),
-      'ornate baroque composition, intricate fabric and jewellery detail',
-      'cinematic chiaroscuro lighting, atmospheric, museum-quality painterly finish'
-    ].join(', ');
-  }
-
-  async function generateVillainImage(v, portraitEl, skeletonEl) {
-    if (typeof puter === 'undefined' || !puter.ai || typeof puter.ai.txt2img !== 'function') {
-      throw new Error('image generation library not available');
-    }
-    const prompt = villainPrompt(v);
-    // FLUX.1 schnell — 1〜2秒級の軽量・高画質モデル
-    const imgEl = await puter.ai.txt2img(prompt, {
-      model: 'black-forest-labs/FLUX.1-schnell'
-    });
-    imgEl.id = 'villain-img';
-    imgEl.alt = `${v.name}の肖像（${v.features.slice(0, 3).join(', ')}）`;
-    imgEl.classList.add('villain-img');
-    // fade-in
-    requestAnimationFrame(() => imgEl.classList.add('loaded'));
-    portraitEl.insertBefore(imgEl, skeletonEl);
-    skeletonEl.classList.add('hidden');
-  }
+  // 各アーキタイプを象徴する小さなラテン語銘 (タロット札の下帯のイメージ)
+  const MOTTOS = {
+    puppeteer:          'QUI DOCET TACET',
+    vain_tyrant:        'IN SPECULO REGNO',
+    cold_executioner:   'SINE IRA SINE SPE',
+    gleeful_tormentor:  'PER RISUM, SANGUIS',
+    dark_sovereign:     'UMBRA SUPER OMNIA',
+    mirror_tyrant:      'FRAGILIS CORONA',
+    silver_serpent:     'LINGUA ARGENTEA',
+    black_charismatic:  'LUX QUAE FALLIT',
+    innocent_seeker:    'LUMEN IN MANIBUS',
+    grey_pilgrim:       'INTER LUCEM ET NOCTEM'
+  };
 
   /* ---------- Result rendering ---------- */
   function renderResult() {
@@ -626,64 +619,51 @@
 
   function renderVillain(v) {
     const wrap = $('villain-card');
+    const motto = MOTTOS[v.id] || '';
 
     wrap.innerHTML = `
       <div class="villain-frame">
-        <div class="villain-portrait" id="villain-portrait">
-          <div class="villain-skeleton" id="villain-skeleton">
-            <span class="skl-line"></span>
-            <span class="skl-line"></span>
-            <span class="skl-line"></span>
-          </div>
-        </div>
 
+        <!-- Tarot-style plaque -->
+        <aside class="villain-plaque">
+          <div class="plaque-inner">
+            <p class="plaque-eyebrow">— Your Archetype —</p>
+            <p class="plaque-latin">Tetras Tenebrarum</p>
+            <div class="plaque-numeral">${v.numeral || ''}</div>
+            <h2 class="plaque-name-jp">${v.name}</h2>
+            <p class="plaque-name-en">${v.en}</p>
+            <div class="plaque-divider" aria-hidden="true">
+              <svg viewBox="0 0 200 8">
+                <line x1="0" y1="4" x2="85" y2="4" stroke="currentColor" stroke-width="0.6"/>
+                <polygon points="92,1 100,4 92,7 84,4" fill="currentColor"/>
+                <polygon points="108,1 116,4 108,7 100,4" fill="currentColor"/>
+                <line x1="115" y1="4" x2="200" y2="4" stroke="currentColor" stroke-width="0.6"/>
+              </svg>
+            </div>
+            <p class="plaque-motto">${motto}</p>
+          </div>
+        </aside>
+
+        <!-- Body -->
         <div class="villain-body">
-          <p class="villain-verdict-label">— Your Archetype —</p>
-          <h2 class="villain-name">
-            <span class="v-jp">あなたは「${v.name}」タイプ</span>
-            <span class="v-en">${v.en}</span>
-          </h2>
-
-          <div class="ornate-divider ornate-divider-sm" aria-hidden="true">
-            <svg viewBox="0 0 260 10">
-              <line x1="0" y1="5" x2="110" y2="5" stroke="currentColor" stroke-width="0.6"/>
-              <polygon points="120,2 130,5 120,8 110,5" fill="currentColor"/>
-              <polygon points="140,2 150,5 140,8 130,5" fill="currentColor"/>
-              <line x1="150" y1="5" x2="260" y2="5" stroke="currentColor" stroke-width="0.6"/>
-            </svg>
-          </div>
-
           <p class="villain-tagline">${v.tagline}</p>
           <p class="villain-narrative">${v.narrative}</p>
 
           <div class="villain-meta">
-            <h4>特徴の参照元</h4>
+            <h4>— 参照した代表的ヴィラン —</h4>
             <p class="villain-inspired">${v.inspired}</p>
           </div>
 
           <div class="villain-meta">
-            <h4>抽出した特徴タグ <span class="villain-meta-note">— 肖像は特徴を合成して新規生成</span></h4>
+            <h4>— 抽出した特徴タグ —</h4>
             <ul class="villain-tags">
               ${v.features.map((f) => `<li>${f}</li>`).join('')}
             </ul>
           </div>
         </div>
+
       </div>
     `;
-
-    const portrait = document.getElementById('villain-portrait');
-    const skeleton = document.getElementById('villain-skeleton');
-
-    // 画像は Puter.js (client-side FLUX) で生成
-    generateVillainImage(v, portrait, skeleton).catch((err) => {
-      console.warn('villain image generation failed:', err);
-      skeleton.classList.add('error');
-      skeleton.innerHTML =
-        '<p class="skl-error">' +
-        '肖像の生成ができませんでした。<br/>' +
-        'ブラウザの拡張機能や通信環境により、<br/>画像生成サービスにアクセスできない場合があります。' +
-        '</p>';
-    });
   }
 
   function renderScoreList(means) {
