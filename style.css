@@ -553,111 +553,33 @@ body:has(#screen-intro.active) .backdrop {
   pointer-events: none;
 }
 
-/* Tarot-style plaque replacing the portrait */
-.villain-plaque {
-  position: relative;
-  aspect-ratio: 3 / 4;
-  background:
-    radial-gradient(200px 300px at 50% 30%, rgba(201, 169, 110, 0.10), transparent 70%),
-    linear-gradient(180deg, #15111a, #0d0a11);
-  border: 1px solid rgba(201, 169, 110, 0.45);
+.villain-portrait {
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgba(201, 169, 110, 0.35);
   box-shadow:
-    inset 0 0 0 1px rgba(201, 169, 110, 0.08),
-    inset 0 0 60px rgba(0, 0, 0, 0.55),
-    0 12px 40px -20px rgba(0, 0, 0, 0.9);
+    0 0 0 1px rgba(0,0,0,0.35),
+    0 18px 40px -18px rgba(0,0,0,0.9),
+    0 0 40px -10px rgba(201, 169, 110, 0.25);
+  background: #120e12;
+}
+.villain-portrait-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.villain-name-accent {
   color: #e8d6a8;
-  padding: 18px;
+  font-weight: 800;
+  padding: 0 2px;
 }
-.villain-plaque::before,
-.villain-plaque::after {
-  content: "";
-  position: absolute;
-  background: #c9a96e;
-  opacity: 0.7;
-}
-.villain-plaque::before {
-  top: 10px; bottom: 10px;
-  left: 10px; width: 1px;
-}
-.villain-plaque::after {
-  top: 10px; bottom: 10px;
-  right: 10px; width: 1px;
-}
-
-.plaque-inner {
-  width: 100%; height: 100%;
-  border-top: 1px solid rgba(201, 169, 110, 0.7);
-  border-bottom: 1px solid rgba(201, 169, 110, 0.7);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 14px 20px;
-  text-align: center;
-}
-
-.plaque-eyebrow {
+.villain-name-en {
   font-family: 'Cinzel', serif;
-  font-size: 9.5px;
-  letter-spacing: 0.44em;
-  color: #c9a96e;
-  margin: 0 0 2px;
-  text-transform: uppercase;
-}
-.plaque-latin {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 12px;
-  letter-spacing: 0.16em;
-  color: #8a7857;
-  margin: 0 0 8px;
-}
-
-.plaque-numeral {
-  font-family: 'Cinzel', serif;
-  font-weight: 900;
-  font-size: 72px;
-  line-height: 1;
-  letter-spacing: 0.1em;
-  color: #e8d6a8;
-  text-shadow:
-    0 0 16px rgba(201, 169, 110, 0.35),
-    0 2px 0 rgba(0,0,0,0.45);
-  margin: 6px 0 10px;
-}
-
-.plaque-name-jp {
-  font-family: 'Noto Serif JP', serif;
-  font-weight: 700;
-  font-size: 22px;
-  letter-spacing: 0.14em;
-  margin: 4px 0 4px;
-  color: #e8d6a8;
-  line-height: 1.3;
-}
-.plaque-name-en {
-  font-family: 'Cinzel', serif;
-  font-size: 10.5px;
-  letter-spacing: 0.32em;
-  color: #b69763;
-  margin: 0 0 4px;
-  text-transform: uppercase;
-}
-
-.plaque-divider {
-  width: 72%;
-  margin: 10px auto 4px;
-  color: #c9a96e;
-  opacity: 0.85;
-}
-.plaque-divider svg { width: 100%; height: 8px; display: block; }
-
-.plaque-motto {
-  font-family: 'Cinzel', serif;
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: 0.36em;
   color: #a79172;
-  margin: 4px 0 0;
+  margin: 2px 0 16px;
   text-transform: uppercase;
 }
 
@@ -760,9 +682,7 @@ body:has(#screen-intro.active) .backdrop {
 
 
 .result-main {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 28px;
+  display: block;
   margin-bottom: 32px;
 }
 
@@ -770,8 +690,10 @@ body:has(#screen-intro.active) .backdrop {
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 20px;
-  min-height: 360px;
+  padding: 28px;
+  min-height: 460px;
+  max-width: 620px;
+  margin: 0 auto 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -779,18 +701,23 @@ body:has(#screen-intro.active) .backdrop {
 }
 
 .score-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  max-width: 860px;
+  margin: 0 auto;
 }
 
 .score-item {
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  padding: 14px 16px;
+  padding: 14px 14px 12px 18px;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 .score-item::before {
   content: '';
@@ -805,30 +732,36 @@ body:has(#screen-intro.active) .backdrop {
 .score-item[data-trait="sad"]::before  { background: var(--sad);  }
 
 .score-item-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 8px;
+  display: block;
+  margin-bottom: 6px;
 }
 .score-item-name {
+  display: block;
   font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 0.04em;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
 }
 .score-item-val {
+  display: block;
   font-family: var(--mono);
-  font-size: 14px;
+  font-size: 12px;
   color: var(--text-dim);
+  margin-top: 4px;
 }
 .score-item-val strong {
   color: var(--text);
-  font-size: 18px;
+  font-size: 22px;
   margin-right: 2px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 .score-item-label {
-  font-size: 12px;
+  font-size: 11.5px;
   color: var(--text-faint);
   letter-spacing: 0.04em;
+  margin-top: 2px;
 }
 
 .score-bar {
@@ -836,7 +769,7 @@ body:has(#screen-intro.active) .backdrop {
   background: rgba(255,255,255,0.06);
   border-radius: 999px;
   overflow: hidden;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 .score-bar-fill {
   height: 100%;
@@ -938,27 +871,117 @@ body:has(#screen-intro.active) .backdrop {
 }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 720px) {
-  .app { padding: 48px 16px 32px; }
-  .parlour { padding: 48px 18px 44px; }
-  .parlour-corners .corner { width: 28px; height: 28px; }
-  .emblem { width: 140px; height: 140px; }
-  .parlour-cards { grid-template-columns: repeat(2, 1fr); }
-  .result-main { grid-template-columns: 1fr; }
-  .chart-wrap { min-height: 300px; }
-  .villain-frame { grid-template-columns: 1fr; gap: 20px; padding: 20px; }
-  .villain-plaque { max-width: 320px; margin: 0 auto; width: 100%; aspect-ratio: 4 / 5; }
-  .plaque-numeral { font-size: 60px; }
-
-  .likert-btn { padding: 14px 18px; }
-  .likert-btn .lab { font-size: 14px; }
-
-  .question-block { margin: 40px 0 32px; min-height: 100px; }
-  .detail-card { padding: 20px; }
-  .detail-name { font-size: 18px; }
+/* ---------- Tablet ---------- */
+@media (max-width: 820px) {
+  .score-list { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .chart-wrap { min-height: 420px; padding: 22px; }
 }
 
-@media (max-width: 420px) {
+/* ---------- Mobile ---------- */
+@media (max-width: 720px) {
+  .app { padding: 40px 14px 28px; }
+
+  /* Intro parlour */
+  .parlour { padding: 44px 16px 40px; }
+  .parlour-corners .corner { width: 26px; height: 26px; }
+  .parlour-corners .tl, .parlour-corners .bl { left: 14px; }
+  .parlour-corners .tr, .parlour-corners .br { right: 14px; }
+  .parlour-corners .tl, .parlour-corners .tr { top: 14px; }
+  .parlour-corners .bl, .parlour-corners .br { bottom: 14px; }
+  .emblem { width: 128px; height: 128px; margin-bottom: 14px; }
+  .latin-eyebrow { font-size: 9.5px; letter-spacing: 0.38em; }
+  .parlour-title .t-jp { font-size: 13px; letter-spacing: 0.38em; text-indent: 0.38em; }
+  .incantation { font-size: 15px; line-height: 1.9; margin-bottom: 28px; }
+  .parlour-cards { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .trait-card { padding: 20px 10px 16px; }
+  .card-numeral { font-size: 20px; margin-bottom: 8px; }
+  .card-en { font-size: 11px; letter-spacing: 0.22em; }
+  .card-jp { font-size: 12.5px; }
+  .card-desc { font-size: 11.5px; line-height: 1.6; }
+  .rite-meta { font-size: 10px; letter-spacing: 0.28em; }
+  .btn-rite { padding: 12px 26px; letter-spacing: 0.22em; gap: 10px; }
+  .btn-rite .btn-label { font-size: 13px; }
+  .btn-rite .btn-glyph { width: 12px; height: 12px; }
+
+  /* Quiz */
+  .question-block { margin: 32px 0 28px; min-height: 96px; }
+  .question-text { font-size: 18px; line-height: 1.7; }
+  .question-label { font-size: 12px; }
+  .likert { gap: 7px; }
   .likert-btn { padding: 13px 16px; }
   .likert-btn .lab { font-size: 13.5px; }
+  .likert-btn.selected::after { right: 16px; width: 7px; height: 7px; }
+
+  /* Result header */
+  .result-header { margin-bottom: 24px; }
+
+  /* Villain card */
+  .villain-frame {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 18px;
+  }
+  .villain-frame::before { inset: 6px; }
+  .villain-portrait {
+    max-width: 280px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .villain-verdict-label { font-size: 10px; letter-spacing: 0.36em; }
+  .villain-name { font-size: 18px; line-height: 1.45; }
+  .villain-name-en { font-size: 10px; letter-spacing: 0.28em; }
+  .villain-tagline { font-size: 15px; line-height: 1.8; }
+  .villain-narrative { font-size: 13.5px; line-height: 1.85; }
+  .villain-inspired { font-size: 12px; line-height: 1.75; }
+  .villain-meta h4 { font-size: 10px; letter-spacing: 0.22em; }
+  .villain-tags li { font-size: 10px; padding: 3px 7px; }
+
+  /* Chart */
+  .chart-wrap {
+    min-height: 360px;
+    padding: 18px;
+  }
+
+  /* Score list - stays 2 columns so labels don't truncate */
+  .score-list { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .score-item { padding: 12px 12px 10px 16px; }
+  .score-item-name { font-size: 12.5px; }
+  .score-item-val strong { font-size: 20px; }
+  .score-item-val { font-size: 11.5px; }
+  .score-item-label { font-size: 11px; }
+
+  /* Detail cards */
+  .detail-card { padding: 18px; }
+  .detail-name { font-size: 17px; }
+  .detail-en { font-size: 10px; letter-spacing: 0.14em; }
+  .detail-head { margin-bottom: 2px; }
+  .detail-level { font-size: 10.5px; padding: 3px 8px; }
+  .detail-section h4 { font-size: 11px; letter-spacing: 0.14em; }
+  .detail-section p { font-size: 13.5px; line-height: 1.85; }
+
+  /* Navigation buttons */
+  .btn { font-size: 14px; padding: 12px 22px; }
+  .result-nav { gap: 10px; }
 }
+
+/* ---------- Small mobile ---------- */
+@media (max-width: 420px) {
+  .app { padding: 32px 12px 24px; }
+  .parlour { padding: 40px 12px 36px; }
+  .parlour-cards { grid-template-columns: 1fr; }
+  .likert-btn { padding: 12px 14px; }
+  .likert-btn .lab { font-size: 13px; }
+  .question-text { font-size: 17px; }
+
+  /* Chart can be tighter here */
+  .chart-wrap { min-height: 320px; padding: 14px; }
+
+  /* Score items stay 2-col; tighten padding */
+  .score-item { padding: 10px 10px 10px 14px; }
+  .score-item-val strong { font-size: 19px; }
+
+  .villain-frame { padding: 14px; gap: 16px; }
+  .villain-portrait { max-width: 240px; }
+  .villain-name { font-size: 16.5px; }
+}
+

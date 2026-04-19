@@ -619,33 +619,26 @@
 
   function renderVillain(v) {
     const wrap = $('villain-card');
-    const motto = MOTTOS[v.id] || '';
 
     wrap.innerHTML = `
       <div class="villain-frame">
 
-        <!-- Tarot-style plaque -->
-        <aside class="villain-plaque">
-          <div class="plaque-inner">
-            <p class="plaque-eyebrow">— Your Archetype —</p>
-            <p class="plaque-latin">Tetras Tenebrarum</p>
-            <div class="plaque-numeral">${v.numeral || ''}</div>
-            <h2 class="plaque-name-jp">${v.name}</h2>
-            <p class="plaque-name-en">${v.en}</p>
-            <div class="plaque-divider" aria-hidden="true">
-              <svg viewBox="0 0 200 8">
-                <line x1="0" y1="4" x2="85" y2="4" stroke="currentColor" stroke-width="0.6"/>
-                <polygon points="92,1 100,4 92,7 84,4" fill="currentColor"/>
-                <polygon points="108,1 116,4 108,7 100,4" fill="currentColor"/>
-                <line x1="115" y1="4" x2="200" y2="4" stroke="currentColor" stroke-width="0.6"/>
-              </svg>
-            </div>
-            <p class="plaque-motto">${motto}</p>
-          </div>
-        </aside>
+        <!-- Pre-generated medieval illumination card -->
+        <figure class="villain-portrait">
+          <img class="villain-portrait-img"
+               src="assets/villains/${v.id}.png"
+               alt="${v.name} / ${v.en}"
+               loading="eager"
+               decoding="async" />
+        </figure>
 
-        <!-- Body -->
         <div class="villain-body">
+          <p class="villain-verdict-label">— Your Archetype —</p>
+          <h2 class="villain-name">
+            あなたは「<span class="villain-name-accent">${v.name}</span>」タイプ
+          </h2>
+          <p class="villain-name-en">${v.en}</p>
+
           <p class="villain-tagline">${v.tagline}</p>
           <p class="villain-narrative">${v.narrative}</p>
 
@@ -729,6 +722,7 @@
       options: {
         responsive: true,
         maintainAspectRatio: true,
+        aspectRatio: 1,
         plugins: {
           legend: { display: false },
           tooltip: {
