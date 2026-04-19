@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ダークトライアド診断 | Dark Tetrad Self-Check</title>
+<meta name="description" content="ダークトライアド（マキャベリアリズム・ナルシシズム・サイコパシー）にサディズムを加えた4因子を診断する簡易アセスメント。" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="backdrop"></div>
+<main class="app">
+
+  <!-- Intro screen -->
+  <section id="screen-intro" class="screen active">
+    <header class="intro-header">
+      <p class="eyebrow">Self Assessment</p>
+      <h1 class="title">ダークトライアド<br /><span class="title-sub">/ Dark Tetrad 診断</span></h1>
+      <p class="lede">
+        マキャベリアリズム・ナルシシズム・サイコパシー、そしてサディズムを加えた
+        「ダークテトラッド」と呼ばれる4つのパーソナリティ傾向を、簡易的にチェックします。
+      </p>
+    </header>
+
+    <div class="intro-cards">
+      <article class="trait-card" data-trait="mach">
+        <h3>マキャベリアリズム</h3>
+        <p>戦略的で冷静な操作性。目的のための計算高さ。</p>
+      </article>
+      <article class="trait-card" data-trait="narc">
+        <h3>ナルシシズム</h3>
+        <p>自分は特別であるという誇大感と賞賛欲求。</p>
+      </article>
+      <article class="trait-card" data-trait="psyc">
+        <h3>サイコパシー</h3>
+        <p>衝動性と希薄な共感、罪悪感の乏しさ。</p>
+      </article>
+      <article class="trait-card" data-trait="sad">
+        <h3>サディズム</h3>
+        <p>他者の苦痛を楽しむ／傷つけることへの快。</p>
+      </article>
+    </div>
+
+    <div class="intro-meta">
+      <p>所要時間 約3〜5分 / 全28問 / 結果はレーダーチャートで表示</p>
+      <p class="disclaimer">
+        ※本診断は学術的尺度（SD3 / SD4 / Dirty Dozen / SSIS 等）を参考にした
+        エンタメ目的のセルフチェックです。臨床診断ではありません。
+      </p>
+    </div>
+
+    <button id="btn-start" class="btn btn-primary">診断をはじめる</button>
+  </section>
+
+  <!-- Quiz screen -->
+  <section id="screen-quiz" class="screen">
+    <div class="quiz-top">
+      <div class="progress-row">
+        <span id="progress-text" class="progress-text">1 / 28</span>
+        <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <p class="question-label">次の記述はあなたにどの程度あてはまりますか？</p>
+      <h2 id="question-text" class="question-text"></h2>
+    </div>
+
+    <div class="likert" id="likert">
+      <button class="likert-btn" data-value="1"><span class="num">1</span><span class="lab">まったくあてはまらない</span></button>
+      <button class="likert-btn" data-value="2"><span class="num">2</span><span class="lab">あまりあてはまらない</span></button>
+      <button class="likert-btn" data-value="3"><span class="num">3</span><span class="lab">どちらともいえない</span></button>
+      <button class="likert-btn" data-value="4"><span class="num">4</span><span class="lab">ややあてはまる</span></button>
+      <button class="likert-btn" data-value="5"><span class="num">5</span><span class="lab">よくあてはまる</span></button>
+    </div>
+
+    <div class="quiz-nav">
+      <button id="btn-back" class="btn btn-ghost" disabled>← 戻る</button>
+    </div>
+  </section>
+
+  <!-- Result screen -->
+  <section id="screen-result" class="screen">
+    <header class="result-header">
+      <p class="eyebrow">Your Result</p>
+      <h2 class="title">あなたのダークテトラッド・プロファイル</h2>
+    </header>
+
+    <div class="result-main">
+      <div class="chart-wrap">
+        <canvas id="radar-chart" aria-label="ダークテトラッドのレーダーチャート" role="img"></canvas>
+      </div>
+      <div class="score-list" id="score-list"></div>
+    </div>
+
+    <div class="result-detail" id="result-detail"></div>
+
+    <div class="result-nav">
+      <button id="btn-retry" class="btn btn-primary">もう一度診断する</button>
+      <button id="btn-share" class="btn btn-ghost">結果をコピー</button>
+    </div>
+
+    <p class="disclaimer">
+      ※結果はあくまで自己申告に基づく傾向の目安です。特定のパーソナリティ障害を診断するものではありません。
+    </p>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>
+    参考文献: Jones & Paulhus (2014) SD3 / Paulhus, Buckels, Trapnell & Jones (2021) SD4 /
+    Jonason & Webster (2010) Dirty Dozen / O'Meara, Davies & Hammond (2011) SSIS
+  </p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
